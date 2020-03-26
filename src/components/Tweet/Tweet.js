@@ -46,45 +46,45 @@ class Tweet extends React.Component {
     let MediaComponent = null, QuoteComponent = null
     
     //Support for extended tweets
-    if ('full_text' in data) {
+    if (data['full_text']) {
       data.text = data.full_text;
 
-      if ('quoted_status' in data) {
+      if (data['quoted_status']) {
         data.quoted_status.text = data.quoted_status.full_text;
       }
       
-      if ('retweeted_status' in data) {
+      if (data['retweeted_status']) {
         data.retweeted_status.text = data.retweeted_status.full_text;
 
-        if ('quoted_status' in data.retweeted_status) {
+        if (data.retweeted_status['quoted_status']) {
           data.retweeted_status.quoted_status.text = data.retweeted_status.quoted_status.full_text;
         }
       }
     }
     
-    if ('extended_tweet' in data) {
+    if (data['extended_tweet']) {
       data.text = data.extended_tweet.full_text;
       data.entities = data.extended_tweet.entities;
       data.extended_entities = data.extended_tweet.extended_entities;
       data.display_text_range = data.extended_tweet.display_text_range;
     }
-    if ('quoted_status' in data) {
-      if ('extended_tweet' in data.quoted_status) {
+    if (data['quoted_status']) {
+      if (data.quoted_status['extended_tweet']) {
         data.quoted_status.text = data.quoted_status.extended_tweet.full_text;
         data.quoted_status.entities = data.quoted_status.extended_tweet.entities;
         data.quoted_status.extended_entities = data.quoted_status.extended_tweet.extended_entities;
         data.quoted_status.display_text_range = data.quoted_status.extended_tweet.display_text_range;
       }
     }
-    if ('retweeted_status' in data) {
-      if ('extended_tweet' in data.retweeted_status) {
+    if (data['retweeted_status']) {
+      if (data.retweeted_status['extended_tweet']) {
         data.retweeted_status.text = data.retweeted_status.extended_tweet.full_text;
         data.retweeted_status.entities = data.retweeted_status.extended_tweet.entities;
         data.retweeted_status.extended_entities = data.retweeted_status.extended_tweet.extended_entities;
         data.retweeted_status.display_text_range = data.retweeted_status.extended_tweet.display_text_range;
       }
       if (data.retweeted_status.is_quote_status) {
-        if ('extended_tweet' in data.retweeted_status.quoted_status) {
+        if (data.retweeted_status.quoted_status['extended_tweet']) {
           data.retweeted_status.quoted_status.text = data.retweeted_status.quoted_status.extended_tweet.full_text;
           data.retweeted_status.quoted_status.entities = data.retweeted_status.quoted_status.extended_tweet.entities;
           data.retweeted_status.quoted_status.extended_entities = data.retweeted_status.quoted_status.extended_tweet.extended_entities;
